@@ -1,8 +1,14 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsNotEmpty, IsPhoneNumber, IsString } from 'class-validator';
-import { SignupDeliverymanDto } from './signup-deliveryman.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsPhoneNumber,
+  IsString,
+  IsStrongPassword,
+  MinLength,
+} from 'class-validator';
 
-export class UpdateDeliverymanDto extends PartialType(SignupDeliverymanDto) {
+export class SignupDeliverymanDto {
   @ApiProperty({
     example: 'Falonchi1',
     description: 'Deliveryman ismi',
@@ -26,6 +32,31 @@ export class UpdateDeliverymanDto extends PartialType(SignupDeliverymanDto) {
   @IsNotEmpty()
   @IsString()
   passport_series: string;
+
+  @ApiProperty({
+    example: 'falon1@mail.uz',
+    description: 'Deliveryman elektron pochtasi',
+  })
+  @IsEmail()
+  email: string;
+
+  @ApiProperty({
+    example: 'password',
+    description: 'Deliveryman paroli',
+  })
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(6)
+  @IsStrongPassword()
+  password: string;
+
+  @ApiProperty({
+    example: 'confirm_password',
+    description: 'Deliveryman paroli',
+  })
+  @IsNotEmpty()
+  @IsString()
+  confirm_password: string;
 
   @ApiProperty({
     example: '+998901234567',
