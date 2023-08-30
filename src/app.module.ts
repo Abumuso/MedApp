@@ -5,6 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Admin } from './admin/models/admin.model';
 import { OwnerModule } from './owner/owner.module';
+import { UserModule } from './user/user.module';
+import { DeliverymanModule } from './deliveryman/deliveryman.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { OwnerModule } from './owner/owner.module';
     AdminModule,
     MailModule,
     OwnerModule,
+    UserModule,
+    DeliverymanModule,
   ],
   controllers: [],
   providers: [],

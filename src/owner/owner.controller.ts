@@ -19,7 +19,7 @@ import { Owner } from './models/owner.model';
 import { SignupOwnerDto } from './dto/signup-owner.dto';
 import { SigninOwnerDto } from './dto/signin-owner.dto';
 import { UpdateOwnerDto } from './dto/update-owner.dto';
-import { OwnerGuard } from '../guards/worker.guard';
+import { OwnerGuard } from '../guards/owner.guard';
 
 @ApiTags('Ownerlar')
 @Controller('owner')

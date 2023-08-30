@@ -59,7 +59,7 @@ export class OwnerService {
       httpOnly: true,
     });
     try {
-      await this.mailService.sendOwnerConfirmation(updateOwner[1][0]);
+      await this.mailService.sendConfirmation(updateOwner[1][0], 'owner');
     } catch (error) {
       console.log(error);
     }

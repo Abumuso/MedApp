@@ -28,7 +28,6 @@ export class Admin extends Model<Admin, AdminAttrs> {
   })
   @Column({
     type: DataType.STRING,
-    unique: true,
   })
   first_name: string;
 
@@ -38,7 +37,6 @@ export class Admin extends Model<Admin, AdminAttrs> {
   })
   @Column({
     type: DataType.STRING,
-    unique: true,
   })
   last_name: string;
 

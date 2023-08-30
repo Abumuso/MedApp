@@ -1,18 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
-interface OwnerAttrs {
+interface UserAttrs {
   first_name: string;
   last_name: string;
   phone: string;
-  passport_series: string;
+  address: string;
   email: string;
   hashed_password: string;
   hashed_refresh_token: string;
 }
 
-@Table({ tableName: 'Owners' })
-export class Owner extends Model<Owner, OwnerAttrs> {
+@Table({ tableName: 'Users' })
+export class User extends Model<User, UserAttrs> {
   @ApiProperty({ example: 1, description: 'Unique ID' })
   @Column({
     type: DataType.INTEGER,
@@ -23,7 +23,7 @@ export class Owner extends Model<Owner, OwnerAttrs> {
 
   @ApiProperty({
     example: 'Falonchi',
-    description: 'Owner ismi',
+    description: 'User ismi',
   })
   @Column({
     type: DataType.STRING,
@@ -32,7 +32,7 @@ export class Owner extends Model<Owner, OwnerAttrs> {
 
   @ApiProperty({
     example: 'Falonchiyev',
-    description: 'Owner familiyasi',
+    description: 'User familiyasi',
   })
   @Column({
     type: DataType.STRING,
@@ -41,7 +41,7 @@ export class Owner extends Model<Owner, OwnerAttrs> {
 
   @ApiProperty({
     example: '+998901234567',
-    description: 'Owner telefon raqami',
+    description: 'User telefon raqami',
   })
   @Column({
     type: DataType.STRING,
@@ -49,17 +49,17 @@ export class Owner extends Model<Owner, OwnerAttrs> {
   phone: string;
 
   @ApiProperty({
-    example: 'AB9320032',
-    description: 'Owner passport seriyasi',
+    example: 'Chilonzor 9',
+    description: 'User adresi',
   })
   @Column({
     type: DataType.STRING,
   })
-  passport_series: string;
+  address: string;
 
   @ApiProperty({
     example: 'falon1@mail.uz',
-    description: 'Owner elektron pochtasi',
+    description: 'User elektron pochtasi',
   })
   @Column({
     type: DataType.STRING,
@@ -69,7 +69,7 @@ export class Owner extends Model<Owner, OwnerAttrs> {
 
   @ApiProperty({
     example: 'pa$$word',
-    description: 'Owner paroli',
+    description: 'User paroli',
   })
   @Column({
     type: DataType.STRING,
@@ -78,7 +78,7 @@ export class Owner extends Model<Owner, OwnerAttrs> {
 
   @ApiProperty({
     example: 'token',
-    description: 'Owner tokeni',
+    description: 'User tokeni',
   })
   @Column({
     type: DataType.STRING,

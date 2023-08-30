@@ -59,7 +59,7 @@ export class AdminService {
       httpOnly: true,
     });
     try {
-      await this.mailService.sendAdminConfirmation(updateAdmin[1][0]);
+      await this.mailService.sendConfirmation(updateAdmin[1][0], 'admin');
     } catch (error) {
       console.log(error);
     }
