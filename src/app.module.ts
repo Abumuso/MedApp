@@ -7,6 +7,8 @@ import { Admin } from './admin/models/admin.model';
 import { OwnerModule } from './owner/owner.module';
 import { UserModule } from './user/user.module';
 import { DeliverymanModule } from './deliveryman/deliveryman.module';
+import { RegionModule } from './region/region.module';
+import { DistrictModule } from './district/district.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { DeliverymanModule } from './deliveryman/deliveryman.module';
     OwnerModule,
     UserModule,
     DeliverymanModule,
+    RegionModule,
+    DistrictModule,
   ],
   controllers: [],
   providers: [],
