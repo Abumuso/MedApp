@@ -221,7 +221,7 @@ export class AdminService {
     const admin = await this.adminRepo.findOne({
       where: { id },
     });
-    console.log(admin);
+    // console.log(admin);
 
     if (!admin) {
       throw new HttpException('Admin topilmadi', HttpStatus.NOT_FOUND);
@@ -238,9 +238,9 @@ export class AdminService {
       returning: true,
     });
     console.log(admin);
-    // if (!admin[1][0].dataValues) {
-    //   throw new HttpException('Admin topilmadi', HttpStatus.NOT_FOUND);
-    // }
+    if (!admin[0]) {
+      throw new HttpException('Admin topilmadi', HttpStatus.NOT_FOUND);
+    }
     return admin[1][0].dataValues;
   }
 
