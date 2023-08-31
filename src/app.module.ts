@@ -9,6 +9,10 @@ import { UserModule } from './user/user.module';
 import { DeliverymanModule } from './deliveryman/deliveryman.module';
 import { RegionModule } from './region/region.module';
 import { DistrictModule } from './district/district.module';
+import { PhotoModule } from './photo/photo.module';
+import { TypeModule } from './type/type.module';
+import { StatusModule } from './status/status.module';
+import { StockModule } from './stock/stock.module';
 
 @Module({
   imports: [
@@ -31,6 +35,10 @@ import { DistrictModule } from './district/district.module';
     DeliverymanModule,
     RegionModule,
     DistrictModule,
+    PhotoModule,
+    TypeModule,
+    StatusModule,
+    StockModule,
   ],
   controllers: [],
   providers: [],
