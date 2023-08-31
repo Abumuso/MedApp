@@ -13,6 +13,7 @@ import { PhotoModule } from './photo/photo.module';
 import { TypeModule } from './type/type.module';
 import { StatusModule } from './status/status.module';
 import { StockModule } from './stock/stock.module';
+import { ProductOrderModule } from './product_order/product_order.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { StockModule } from './stock/stock.module';
     TypeModule,
     StatusModule,
     StockModule,
+    ProductOrderModule,
   ],
   controllers: [],
   providers: [],
