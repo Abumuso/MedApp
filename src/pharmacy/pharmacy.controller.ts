@@ -1,34 +1,53 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PharmacyService } from './pharmacy.service';
 import { CreatePharmacyDto } from './dto/create-pharmacy.dto';
+import { Pharmacy } from './models/pharmacy.model';
 import { UpdatePharmacyDto } from './dto/update-pharmacy.dto';
 
+@ApiTags('Pharmacylar')
 @Controller('pharmacy')
 export class PharmacyController {
   constructor(private readonly pharmacyService: PharmacyService) {}
 
-  @Post()
-  create(@Body() createPharmacyDto: CreatePharmacyDto) {
-    return this.pharmacyService.create(createPharmacyDto);
+  @ApiOperation({ summary: 'Pharmacy yaratish' })
+  @Post('create')
+  async createPharmacy(@Body() createPharmacyDto: CreatePharmacyDto) {
+    return this.pharmacyService.createPharmacy(createPharmacyDto);
   }
 
-  @Get()
-  findAll() {
-    return this.pharmacyService.findAll();
+  @ApiOperation({ summary: "Pharmacylarni ko'rish" })
+  @Get('all')
+  async getAllPharmacy(): Promise<Pharmacy[]> {
+    return this.pharmacyService.getAllPharmacy();
   }
 
+  @ApiOperation({ summary: "Pharmacyni id bo'yicha ko'rish" })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pharmacyService.findOne(+id);
+  async getPharmacyBYId(@Param('id') id: string): Promise<Pharmacy> {
+    return this.pharmacyService.getPharmacyById(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePharmacyDto: UpdatePharmacyDto) {
-    return this.pharmacyService.update(+id, updatePharmacyDto);
+  @ApiOperation({ summary: "Pharmacyni o'zgartirish" })
+  @Put(':id')
+  async updatePharmacy(
+    @Param('id') id: string,
+    @Body() updatePharmacyDto: UpdatePharmacyDto,
+  ): Promise<Pharmacy> {
+    return this.pharmacyService.updatePharmacy(+id, updatePharmacyDto);
   }
 
+  @ApiOperation({ summary: "Pharmacyni o'chirish" })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pharmacyService.remove(+id);
+  async deletePharmacyById(@Param('id') id: string): Promise<object> {
+    return this.pharmacyService.deletePharmacyById(+id);
   }
 }
