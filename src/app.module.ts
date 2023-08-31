@@ -16,6 +16,7 @@ import { StockModule } from './stock/stock.module';
 import { ProductOrderModule } from './product_order/product_order.module';
 import { OrderModule } from './order/order.module';
 import { PharmacyModule } from './pharmacy/pharmacy.module';
+import { MedproductModule } from './medproduct/medproduct.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { PharmacyModule } from './pharmacy/pharmacy.module';
     ProductOrderModule,
     OrderModule,
     PharmacyModule,
+    MedproductModule,
   ],
   controllers: [],
   providers: [],
