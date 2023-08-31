@@ -1,34 +1,53 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { StockService } from './stock.service';
 import { CreateStockDto } from './dto/create-stock.dto';
+import { Stock } from './models/stock.model';
 import { UpdateStockDto } from './dto/update-stock.dto';
 
+@ApiTags('Stocklar')
 @Controller('stock')
 export class StockController {
   constructor(private readonly stockService: StockService) {}
 
-  @Post()
-  create(@Body() createStockDto: CreateStockDto) {
-    return this.stockService.create(createStockDto);
+  @ApiOperation({ summary: 'Stock yaratish' })
+  @Post('create')
+  async createStock(@Body() createStockDto: CreateStockDto) {
+    return this.stockService.createStock(createStockDto);
   }
 
-  @Get()
-  findAll() {
-    return this.stockService.findAll();
+  @ApiOperation({ summary: "Stocklarni ko'rish" })
+  @Get('all')
+  async getAllStock(): Promise<Stock[]> {
+    return this.stockService.getAllStock();
   }
 
+  @ApiOperation({ summary: "Stockni id bo'yicha ko'rish" })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.stockService.findOne(+id);
+  async getStockBYId(@Param('id') id: string): Promise<Stock> {
+    return this.stockService.getStockById(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStockDto: UpdateStockDto) {
-    return this.stockService.update(+id, updateStockDto);
+  @ApiOperation({ summary: "Stockni o'zgartirish" })
+  @Put(':id')
+  async updateStock(
+    @Param('id') id: string,
+    @Body() updateStockDto: UpdateStockDto,
+  ): Promise<Stock> {
+    return this.stockService.updateStock(+id, updateStockDto);
   }
 
+  @ApiOperation({ summary: "Stockni o'chirish" })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.stockService.remove(+id);
+  async deleteStockById(@Param('id') id: string): Promise<object> {
+    return this.stockService.deleteStockById(+id);
   }
 }
