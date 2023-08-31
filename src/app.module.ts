@@ -14,6 +14,8 @@ import { TypeModule } from './type/type.module';
 import { StatusModule } from './status/status.module';
 import { StockModule } from './stock/stock.module';
 import { ProductOrderModule } from './product_order/product_order.module';
+import { OrderModule } from './order/order.module';
+import { PharmacyModule } from './pharmacy/pharmacy.module';
 
 @Module({
   imports: [
@@ -41,6 +43,8 @@ import { ProductOrderModule } from './product_order/product_order.module';
     StatusModule,
     StockModule,
     ProductOrderModule,
+    OrderModule,
+    PharmacyModule,
   ],
   controllers: [],
   providers: [],
