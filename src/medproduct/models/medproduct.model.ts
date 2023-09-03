@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Type } from '../../type/models/type.model';
 
 interface MedproductAttrs {
   name: string;
@@ -32,6 +40,7 @@ export class Medproduct extends Model<Medproduct, MedproductAttrs> {
     example: '1',
     description: 'Type IDsi',
   })
+  @ForeignKey(() => Type)
   @Column({
     type: DataType.INTEGER,
   })
@@ -63,4 +72,7 @@ export class Medproduct extends Model<Medproduct, MedproductAttrs> {
     type: DataType.TEXT,
   })
   info: string;
+
+  @BelongsTo(() => Type)
+  type: Type;
 }

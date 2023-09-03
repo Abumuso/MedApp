@@ -1,5 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { Region } from '../../region/models/region.model';
+import { District } from '../../district/models/district.model';
+import { Owner } from '../../owner/models/owner.model';
 
 interface PharmacyAttrs {
   name: string;
@@ -34,6 +44,7 @@ export class Pharmacy extends Model<Pharmacy, PharmacyAttrs> {
     example: '1',
     description: 'Region IDsi',
   })
+  @ForeignKey(() => Region)
   @Column({
     type: DataType.INTEGER,
   })
@@ -43,6 +54,7 @@ export class Pharmacy extends Model<Pharmacy, PharmacyAttrs> {
     example: '1',
     description: 'District IDsi',
   })
+  @ForeignKey(() => District)
   @Column({
     type: DataType.INTEGER,
   })
@@ -79,8 +91,18 @@ export class Pharmacy extends Model<Pharmacy, PharmacyAttrs> {
     example: '1',
     description: 'Owner IDsi',
   })
+  @ForeignKey(() => Owner)
   @Column({
     type: DataType.INTEGER,
   })
   owner_id: number;
+
+  @BelongsTo(() => Region)
+  region: Region;
+
+  @BelongsTo(() => District)
+  district: District;
+
+  @BelongsTo(() => Owner)
+  owner: Owner;
 }
