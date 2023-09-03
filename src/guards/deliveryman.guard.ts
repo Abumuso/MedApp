@@ -26,15 +26,18 @@ export class DeliverymanGuard implements CanActivate {
       throw new UnauthorizedException('Deliveryman unathorized');
     }
     async function verify(token: string, jwtService: JwtService) {
-      const admin: Partial<Deliveryman> = await jwtService.verify(token, {
+      const deliveryman: Partial<Deliveryman> = await jwtService.verify(token, {
         secret: process.env.ACCESS_TOKEN_KEY,
       });
-      if (!admin) {
+      if (!deliveryman) {
         throw new UnauthorizedException('Invalid token provided');
       }
-      if (!admin.is_active) {
+      if (!deliveryman.is_active) {
         throw new BadRequestException('Deliveryman is not active');
       }
+
+      req.user = deliveryman;
+      // console.log(req);
       return true;
     }
     return verify(token, this.jwtService);

@@ -26,15 +26,18 @@ export class UserGuard implements CanActivate {
       throw new UnauthorizedException('User unathorized');
     }
     async function verify(token: string, jwtService: JwtService) {
-      const admin: Partial<User> = await jwtService.verify(token, {
+      const user: Partial<User> = await jwtService.verify(token, {
         secret: process.env.ACCESS_TOKEN_KEY,
       });
-      if (!admin) {
+      if (!user) {
         throw new UnauthorizedException('Invalid token provided');
       }
-      if (!admin.is_active) {
+      if (!user.is_active) {
         throw new BadRequestException('User is not active');
       }
+
+      req.user = user;
+
       return true;
     }
     return verify(token, this.jwtService);

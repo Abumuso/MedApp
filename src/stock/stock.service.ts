@@ -21,7 +21,10 @@ export class StockService {
   }
 
   async getStockById(id: number): Promise<Stock> {
-    const stock = await this.stockRepo.findOne({ where: { id } });
+    const stock = await this.stockRepo.findOne({
+      where: { id },
+      include: { all: true },
+    });
     if (!stock) {
       throw new HttpException('Stock topilmadi', HttpStatus.NOT_FOUND);
     }

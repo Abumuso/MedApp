@@ -20,6 +20,7 @@ import { Response } from 'express';
 import { SigninAdminDto } from './dto/signin-admin.dto';
 import { CookieGetter } from '../decorators/cookieGetter.decorator';
 import { AdminGuard } from '../guards/admin.guard';
+import { SelfGuard } from '../guards/self.guard';
 
 @ApiTags('Adminlar')
 @Controller('admin')
@@ -58,7 +59,7 @@ export class AdminController {
     return this.adminService.signout(refreshToken, res);
   }
 
-  @UseGuards(AdminGuard)
+  // @UseGuards(AdminGuard)
   @Post(':id/refresh')
   refresh(
     @Param('id') id: string,
@@ -76,18 +77,24 @@ export class AdminController {
   }
 
   @ApiOperation({ summary: "Adminlarni ko'rish" })
+  // @UseGuards(SelfGuard)
+  @UseGuards(AdminGuard)
   @Get('all')
   async getAllAdmins(): Promise<Admin[]> {
     return this.adminService.getAllAdmins();
   }
 
   @ApiOperation({ summary: "Adminni id bo'yicha ko'rish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(AdminGuard)
   @Get(':id')
   async getAdminBYId(@Param('id') id: string): Promise<Admin> {
     return this.adminService.getAdminById(+id);
   }
 
   @ApiOperation({ summary: "Adminni o'zgartirish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(AdminGuard)
   @Put(':id')
   async updateAdmin(
     @Param('id') id: string,
@@ -97,6 +104,8 @@ export class AdminController {
   }
 
   @ApiOperation({ summary: "Adminni o'chirish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(AdminGuard)
   @Delete(':id')
   async deleteAdminById(@Param('id') id: string): Promise<object> {
     return this.adminService.deleteAdminById(+id);

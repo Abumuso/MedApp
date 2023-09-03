@@ -20,6 +20,8 @@ import { SignupDeliverymanDto } from './dto/signup-deliveryman.dto';
 import { SigninDeliverymanDto } from './dto/signin-deliveryman.dto';
 import { UpdateDeliverymanDto } from './dto/update-deliveryman.dto';
 import { DeliverymanGuard } from '../guards/deliveryman.guard';
+import { SelfGuard } from '../guards/self.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Deliverymanlar')
 @Controller('deliveryman')
@@ -76,18 +78,23 @@ export class DeliverymanController {
   }
 
   @ApiOperation({ summary: "Deliverymanlarni ko'rish" })
+  @UseGuards(AdminGuard)
   @Get('all')
   async getAllDeliverymans(): Promise<Deliveryman[]> {
     return this.deliverymanService.getAllDeliverymans();
   }
 
   @ApiOperation({ summary: "Deliverymanni id bo'yicha ko'rish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(DeliverymanGuard)
   @Get(':id')
   async getDeliverymanBYId(@Param('id') id: string): Promise<Deliveryman> {
     return this.deliverymanService.getDeliverymanById(+id);
   }
 
   @ApiOperation({ summary: "Deliverymanni o'zgartirish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(DeliverymanGuard)
   @Put(':id')
   async updateDeliveryman(
     @Param('id') id: string,
@@ -97,6 +104,8 @@ export class DeliverymanController {
   }
 
   @ApiOperation({ summary: "Deliverymanni o'chirish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(DeliverymanGuard)
   @Delete(':id')
   async deleteDeliverymanById(@Param('id') id: string): Promise<object> {
     return this.deliverymanService.deleteDeliverymanById(+id);

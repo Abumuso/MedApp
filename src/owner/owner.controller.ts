@@ -20,6 +20,8 @@ import { SignupOwnerDto } from './dto/signup-owner.dto';
 import { SigninOwnerDto } from './dto/signin-owner.dto';
 import { UpdateOwnerDto } from './dto/update-owner.dto';
 import { OwnerGuard } from '../guards/owner.guard';
+import { SelfGuard } from '../guards/self.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Ownerlar')
 @Controller('owner')
@@ -76,18 +78,23 @@ export class OwnerController {
   }
 
   @ApiOperation({ summary: "Ownerlarni ko'rish" })
+  @UseGuards(AdminGuard)
   @Get('all')
   async getAllOwners(): Promise<Owner[]> {
     return this.ownerService.getAllOwners();
   }
 
   @ApiOperation({ summary: "Ownerni id bo'yicha ko'rish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(OwnerGuard)
   @Get(':id')
   async getOwnerBYId(@Param('id') id: string): Promise<Owner> {
     return this.ownerService.getOwnerById(+id);
   }
 
   @ApiOperation({ summary: "Ownerni o'zgartirish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(OwnerGuard)
   @Put(':id')
   async updateOwner(
     @Param('id') id: string,
@@ -97,6 +104,8 @@ export class OwnerController {
   }
 
   @ApiOperation({ summary: "Ownerni o'chirish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(OwnerGuard)
   @Delete(':id')
   async deleteOwnerById(@Param('id') id: string): Promise<object> {
     return this.ownerService.deleteOwnerById(+id);

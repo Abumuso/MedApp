@@ -6,7 +6,9 @@ import { UpdateMedproductDto } from './dto/update-medproduct.dto';
 
 @Injectable()
 export class MedproductService {
-  constructor(@InjectModel(Medproduct) private medproductRepo: typeof Medproduct) {}
+  constructor(
+    @InjectModel(Medproduct) private medproductRepo: typeof Medproduct,
+  ) {}
 
   async createMedproduct(
     createMedproductDto: CreateMedproductDto,
@@ -23,7 +25,10 @@ export class MedproductService {
   }
 
   async getMedproductById(id: number): Promise<Medproduct> {
-    const medproduct = await this.medproductRepo.findOne({ where: { id } });
+    const medproduct = await this.medproductRepo.findOne({
+      where: { id },
+      include: { all: true },
+    });
     if (!medproduct) {
       throw new HttpException('Medproduct topilmadi', HttpStatus.NOT_FOUND);
     }

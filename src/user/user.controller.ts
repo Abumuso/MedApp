@@ -20,6 +20,8 @@ import { SignupUserDto } from './dto/signup-user.dto';
 import { SigninUserDto } from './dto/signin-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserGuard } from '../guards/user.guard';
+import { SelfGuard } from '../guards/self.guard';
+import { AdminGuard } from '../guards/admin.guard';
 
 @ApiTags('Userlar')
 @Controller('user')
@@ -76,18 +78,23 @@ export class UserController {
   }
 
   @ApiOperation({ summary: "Userlarni ko'rish" })
+  @UseGuards(AdminGuard)
   @Get('all')
   async getAllUsers(): Promise<User[]> {
     return this.userService.getAllUsers();
   }
 
   @ApiOperation({ summary: "Userni id bo'yicha ko'rish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(UserGuard)
   @Get(':id')
   async getUserBYId(@Param('id') id: string): Promise<User> {
     return this.userService.getUserById(+id);
   }
 
   @ApiOperation({ summary: "Userni o'zgartirish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(UserGuard)
   @Put(':id')
   async updateUser(
     @Param('id') id: string,
@@ -97,6 +104,8 @@ export class UserController {
   }
 
   @ApiOperation({ summary: "Userni o'chirish" })
+  @UseGuards(SelfGuard)
+  @UseGuards(UserGuard)
   @Delete(':id')
   async deleteUserById(@Param('id') id: string): Promise<object> {
     return this.userService.deleteUserById(+id);

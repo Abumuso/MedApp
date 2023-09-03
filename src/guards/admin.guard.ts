@@ -11,9 +11,9 @@ import { Admin } from '../admin/models/admin.model';
 @Injectable()
 export class AdminGuard implements CanActivate {
   constructor(private readonly jwtService: JwtService) {}
-
   canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
+
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       throw new UnauthorizedException('Admin unathorized');
@@ -35,6 +35,8 @@ export class AdminGuard implements CanActivate {
       if (!admin.is_active) {
         throw new BadRequestException('Admin is not active');
       }
+      req.user = admin;
+      // console.log(req);
       return true;
     }
     return verify(token, this.jwtService);

@@ -8,7 +8,9 @@ import { UpdatePharmacyDto } from './dto/update-pharmacy.dto';
 export class PharmacyService {
   constructor(@InjectModel(Pharmacy) private pharmacyRepo: typeof Pharmacy) {}
 
-  async createPharmacy(createPharmacyDto: CreatePharmacyDto): Promise<Pharmacy> {
+  async createPharmacy(
+    createPharmacyDto: CreatePharmacyDto,
+  ): Promise<Pharmacy> {
     const pharmacy = await this.pharmacyRepo.create(createPharmacyDto);
     return pharmacy;
   }
@@ -21,7 +23,10 @@ export class PharmacyService {
   }
 
   async getPharmacyById(id: number): Promise<Pharmacy> {
-    const pharmacy = await this.pharmacyRepo.findOne({ where: { id } });
+    const pharmacy = await this.pharmacyRepo.findOne({
+      where: { id },
+      include: { all: true },
+    });
     if (!pharmacy) {
       throw new HttpException('Pharmacy topilmadi', HttpStatus.NOT_FOUND);
     }
@@ -41,7 +46,10 @@ export class PharmacyService {
       returning: true,
     });
     if (!pharmacy2[0]) {
-      throw new HttpException("o'zgartilayotgan qator kiritilmadi", HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        "o'zgartilayotgan qator kiritilmadi",
+        HttpStatus.NOT_FOUND,
+      );
     }
     return pharmacy[1][0].dataValues;
   }

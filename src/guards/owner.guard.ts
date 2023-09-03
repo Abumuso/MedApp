@@ -26,15 +26,18 @@ export class OwnerGuard implements CanActivate {
       throw new UnauthorizedException('Owner unathorized');
     }
     async function verify(token: string, jwtService: JwtService) {
-      const admin: Partial<Owner> = await jwtService.verify(token, {
+      const owner: Partial<Owner> = await jwtService.verify(token, {
         secret: process.env.ACCESS_TOKEN_KEY,
       });
-      if (!admin) {
+      if (!owner) {
         throw new UnauthorizedException('Invalid token provided');
       }
-      if (!admin.is_active) {
+      if (!owner.is_active) {
         throw new BadRequestException('Owner is not active');
       }
+
+      req.user = owner;
+
       return true;
     }
     return verify(token, this.jwtService);
