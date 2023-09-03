@@ -193,6 +193,7 @@ export class AdminService {
       id: admin.id,
       phone: admin.phone,
       is_active: admin.is_active,
+      is_super: admin.is_super,
     };
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(jwtPayload, {

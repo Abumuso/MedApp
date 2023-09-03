@@ -21,6 +21,7 @@ import { SigninAdminDto } from './dto/signin-admin.dto';
 import { CookieGetter } from '../decorators/cookieGetter.decorator';
 import { AdminGuard } from '../guards/admin.guard';
 import { SelfGuard } from '../guards/self.guard';
+import { SuperAdminGuard } from '../guards/superadmin.guard';
 
 @ApiTags('Adminlar')
 @Controller('admin')
@@ -77,7 +78,7 @@ export class AdminController {
   }
 
   @ApiOperation({ summary: "Adminlarni ko'rish" })
-  // @UseGuards(SelfGuard)
+  @UseGuards(SuperAdminGuard)
   @UseGuards(AdminGuard)
   @Get('all')
   async getAllAdmins(): Promise<Admin[]> {
