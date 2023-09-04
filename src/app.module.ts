@@ -17,6 +17,19 @@ import { ProductOrderModule } from './product_order/product_order.module';
 import { OrderModule } from './order/order.module';
 import { PharmacyModule } from './pharmacy/pharmacy.module';
 import { MedproductModule } from './medproduct/medproduct.module';
+import { Deliveryman } from './deliveryman/models/deliveryman.model';
+import { District } from './district/models/district.model';
+import { Medproduct } from './medproduct/models/medproduct.model';
+import { Order } from './order/models/order.model';
+import { Owner } from './owner/models/owner.model';
+import { Pharmacy } from './pharmacy/models/pharmacy.model';
+import { Photo } from './photo/models/photo.model';
+import { ProductOrder } from './product_order/models/product_order.model';
+import { Region } from './region/models/region.model';
+import { Status } from './status/models/status.model';
+import { Stock } from './stock/models/stock.model';
+import { Type } from './type/models/type.model';
+import { User } from './user/models/user.model';
 
 @Module({
   imports: [
@@ -28,7 +41,22 @@ import { MedproductModule } from './medproduct/medproduct.module';
       username: process.env.POSTGRES_USER,
       password: String(process.env.POSTGRES_PASSWORD),
       database: process.env.POSTGRES_DB,
-      models: [Admin],
+      models: [
+        Admin,
+        Deliveryman,
+        District,
+        Medproduct,
+        Order,
+        Owner,
+        Pharmacy,
+        Photo,
+        ProductOrder,
+        Region,
+        Status,
+        Stock,
+        Type,
+        User,
+      ],
       autoLoadModels: true,
       logging: false,
     }),

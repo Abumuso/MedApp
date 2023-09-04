@@ -21,7 +21,7 @@ interface PharmacyAttrs {
   owner_id: number;
 }
 
-@Table({ tableName: 'Pharmacys' })
+@Table({ tableName: 'pharmacy' })
 export class Pharmacy extends Model<Pharmacy, PharmacyAttrs> {
   @ApiProperty({ example: 1, description: 'Unique ID' })
   @Column({

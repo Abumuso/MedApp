@@ -12,7 +12,7 @@ interface AdminAttrs {
   hashed_refresh_token: string;
 }
 
-@Table({ tableName: 'admins' })
+@Table({ tableName: 'admin' })
 export class Admin extends Model<Admin, AdminAttrs> {
   @ApiProperty({ example: 1, description: 'Unique ID' })
   @Column({

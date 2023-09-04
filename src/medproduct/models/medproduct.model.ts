@@ -17,7 +17,7 @@ interface MedproductAttrs {
   info: string;
 }
 
-@Table({ tableName: 'Medproducts' })
+@Table({ tableName: 'medproduct' })
 export class Medproduct extends Model<Medproduct, MedproductAttrs> {
   @ApiProperty({ example: 1, description: 'Unique ID' })
   @Column({

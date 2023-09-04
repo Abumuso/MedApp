@@ -11,7 +11,7 @@ interface OwnerAttrs {
   hashed_refresh_token: string;
 }
 
-@Table({ tableName: 'Owners' })
+@Table({ tableName: 'owner' })
 export class Owner extends Model<Owner, OwnerAttrs> {
   @ApiProperty({ example: 1, description: 'Unique ID' })
   @Column({

@@ -11,7 +11,7 @@ interface UserAttrs {
   hashed_refresh_token: string;
 }
 
-@Table({ tableName: 'Users' })
+@Table({ tableName: 'user' })
 export class User extends Model<User, UserAttrs> {
   @ApiProperty({ example: 1, description: 'Unique ID' })
   @Column({

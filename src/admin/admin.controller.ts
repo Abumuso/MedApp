@@ -22,6 +22,7 @@ import { CookieGetter } from '../decorators/cookieGetter.decorator';
 import { AdminGuard } from '../guards/admin.guard';
 import { SelfGuard } from '../guards/self.guard';
 import { SuperAdminGuard } from '../guards/superadmin.guard';
+import { User } from '../user/models/user.model';
 
 @ApiTags('Adminlar')
 @Controller('admin')
@@ -79,7 +80,6 @@ export class AdminController {
 
   @ApiOperation({ summary: "Adminlarni ko'rish" })
   @UseGuards(SuperAdminGuard)
-  @UseGuards(AdminGuard)
   @Get('all')
   async getAllAdmins(): Promise<Admin[]> {
     return this.adminService.getAllAdmins();
@@ -111,4 +111,6 @@ export class AdminController {
   async deleteAdminById(@Param('id') id: string): Promise<object> {
     return this.adminService.deleteAdminById(+id);
   }
+
+  
 }

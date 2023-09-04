@@ -110,4 +110,6 @@ export class UserController {
   async deleteUserById(@Param('id') id: string): Promise<object> {
     return this.userService.deleteUserById(+id);
   }
+
+  
 }

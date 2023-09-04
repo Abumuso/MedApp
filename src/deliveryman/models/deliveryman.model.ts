@@ -12,7 +12,7 @@ interface DeliverymanAttrs {
   hashed_refresh_token: string;
 }
 
-@Table({ tableName: 'Deliverymans' })
+@Table({ tableName: 'deliveryman' })
 export class Deliveryman extends Model<Deliveryman, DeliverymanAttrs> {
   @ApiProperty({ example: 1, description: 'Unique ID' })
   @Column({
